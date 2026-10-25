@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#0d0907">
+    <meta name="description" content="Consulte le wiki officiel d'Annecy RP : règlement général, règles roleplay, métiers, sanctions et informations utiles.">
+
+    <title>Wiki & Règlement — Annecy RP</title>
+
+    <link rel="stylesheet" href="src/css/style.css">
+
+    <style>
+
+        :root {
+            --wiki-bg: #0d0907;
+            --wiki-sidebar: #100b08;
+            --wiki-panel: #18110c;
+            --wiki-border: rgba(255, 145, 66, 0.15);
+            --wiki-orange: #ff781f;
+            --wiki-orange-light: #ffad66;
+            --wiki-text: #fff8f2;
+            --wiki-muted: #b9a99c;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 95px;
+        }
+
+        body {
+            background: var(--wiki-bg);
+            color: var(--wiki-text);
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            line-height: 1.75;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        input {
+            font: inherit;
+        }
+
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .wiki-topbar {
+            height: 70px;
+            padding: 0 5%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+
+            background: rgba(13, 9, 7, 0.94);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+
+            border-bottom: 1px solid var(--wiki-border);
+        }
+
+        .wiki-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .wiki-brand-icon {
+            width: 38px;
+            height: 38px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 11px;
+            background: linear-gradient(135deg, #ffad55, #f05a0a);
+
+            color: white;
+            font-size: 22px;
+            font-weight: 900;
+        }
+
+        .wiki-brand-name {
+            font-size: 14px;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .wiki-brand-name span {
+            color: var(--wiki-orange);
+        }
+
+        .wiki-brand-subtitle {
+            color: var(--wiki-muted);
+            font-size: 10px;
+        }
+
+        .wiki-top-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .wiki-home-link {
+            color: var(--wiki-muted);
+            font-size: 12px;
+            transition: color 0.2s;
+        }
+
+        .wiki-home-link:hover {
+            color: var(--wiki-orange-light);
+        }
+
+        .wiki-discord {
+            padding: 9px 15px;
+            border-radius: 9px;
+
+            background: linear-gradient(135deg, #ff963f, #f05b0b);
+
+            color: white;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .wiki-layout {
+            display: grid;
+            grid-template-columns: 265px minmax(0, 1fr);
+            min-height: calc(100vh - 70px);
+        }
+
+        .wiki-sidebar {
+            width: 265px;
+            padding: 28px 18px;
+
+            position: fixed;
+            top: 70px;
+            bottom: 0;
+            left: 0;
+            overflow-y: auto;
+
+            background: var(--wiki-sidebar);
+            border-right: 1px solid var(--wiki-border);
+        }
+
+        .wiki-search {
+            width: 100%;
+            height: 42px;
+            padding: 0 12px;
+            margin-bottom: 30px;
+
+            background: #1b130e;
+            border: 1px solid var(--wiki-border);
+            border-radius: 9px;
+
+            color: var(--wiki-text);
+            font-size: 12px;
+            outline: none;
+        }
+
+        .wiki-search::placeholder {
+            color: #907d6e;
+        }
+
+        .wiki-search:focus {
+            border-color: var(--wiki-orange);
+        }
+
+        .wiki-nav-title {
+            padding: 0 10px;
+            margin: 22px 0 9px;
+
+            color: #8e7b6b;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .wiki-nav {
+            display: grid;
+            gap: 4px;
+        }
+
+        .wiki-nav a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            padding: 10px 12px;
+            border: 1px solid transparent;
+            border-radius: 8px;
+
+            color: var(--wiki-muted);
+            font-size: 12px;
+
+            transition: 0.2s;
+        }
+
+        .wiki-nav a:hover {
+            color: var(--wiki-orange-light);
+            background: rgba(255, 122, 26, 0.06);
+        }
+
+        .wiki-nav a.active {
+            color: var(--wiki-orange-light);
+            background: rgba(255, 122, 26, 0.11);
+            border-color: rgba(255, 122, 26, 0.17);
+            font-weight: 700;
+        }
+
+        .wiki-nav-icon {
+            width: 19px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .wiki-sidebar-footer {
+            margin-top: 35px;
+            padding: 15px;
+
+            border: 1px solid var(--wiki-border);
+            border-radius: 10px;
+
+            background: rgba(255, 122, 26, 0.045);
+        }
+
+        .wiki-sidebar-footer strong {
+            display: block;
+            margin-bottom: 5px;
+
+            color: var(--wiki-orange-light);
+            font-size: 12px;
+        }
+
+        .wiki-sidebar-footer p {
+            margin: 0;
+            color: var(--wiki-muted);
+            font-size: 11px;
+        }
+
+        .wiki-main {
+            grid-column: 2;
+            min-width: 0;
+            padding: 55px 7%;
+        }
+
+        .wiki-article {
+            width: 100%;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .wiki-breadcrumb {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 9px;
+
+            margin-bottom: 22px;
+
+            color: #927e6d;
+            font-size: 11px;
+        }
+
+        .wiki-breadcrumb span:last-child {
+            color: var(--wiki-orange-light);
+        }
+
+        .wiki-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            margin-bottom: 12px;
+
+            color: var(--wiki-orange-light);
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .wiki-label::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+
+            background: var(--wiki-orange);
+            border-radius: 50%;
+            box-shadow: 0 0 12px rgba(255, 120, 31, 0.4);
+        }
+
+        .wiki-article h1 {
+            margin: 0 0 15px;
+
+            color: var(--wiki-text);
+            font-size: clamp(34px, 5vw, 49px);
+            font-weight: 900;
+            line-height: 1.2;
+            letter-spacing: -1.5px;
+        }
+
+        .wiki-article h1 span {
+            color: var(--wiki-orange);
+        }
+
+        .wiki-intro {
+            max-width: 680px;
+            margin-bottom: 25px;
+
+            color: var(--wiki-muted);
+            font-size: 15px;
+            line-height: 1.9;
+        }
+
+        .wiki-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 17px;
+
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--wiki-border);
+
+            color: #a28d7b;
+            font-size: 11px;
+        }
+
+        .wiki-section {
+            padding-top: 35px;
+            scroll-margin-top: 90px;
+        }
+
+        .wiki-section h2 {
+            margin: 0 0 15px;
+            padding-bottom: 12px;
+
+            border-bottom: 1px solid var(--wiki-border);
+
+            color: var(--wiki-text);
+            font-size: 23px;
+            line-height: 1.4;
+        }
+
+        .wiki-section h3 {
+            margin: 25px 0 10px;
+            color: #ffbf8b;
+            font-size: 16px;
+        }
+
+        .wiki-section p {
+            margin: 10px 0;
+            color: #c6b6a8;
+            font-size: 13px;
+            line-height: 1.9;
+        }
+
+        .wiki-section ul,
+        .wiki-section ol {
+            padding-left: 23px;
+            color: #c6b6a8;
+            font-size: 13px;
+        }
+
+        .wiki-section li {
+            margin: 9px 0;
+            padding-left: 3px;
+        }
+
+        .wiki-section li::marker {
+            color: var(--wiki-orange);
+        }
+
+        .wiki-callout {
+            display: flex;
+            align-items: flex-start;
+            gap: 13px;
+
+            margin: 22px 0;
+            padding: 17px;
+
+            background: rgba(255, 122, 26, 0.07);
+            border: 1px solid rgba(255, 122, 26, 0.2);
+            border-left: 3px solid var(--wiki-orange);
+            border-radius: 9px;
+        }
+
+        .wiki-callout-icon {
+            flex-shrink: 0;
+            font-size: 17px;
+        }
+
+        .wiki-callout strong {
+            display: block;
+            margin-bottom: 4px;
+
+            color: var(--wiki-orange-light);
+            font-size: 12px;
+        }
+
+        .wiki-callout p {
+            margin: 0;
+            font-size: 12px;
+        }
+
+        .wiki-cards {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+
+            margin: 22px 0;
+        }
+
+        .wiki-card {
+            display: block;
+            padding: 20px;
+
+            background: linear-gradient(145deg, #21170f, #15100c);
+            border: 1px solid var(--wiki-border);
+            border-radius: 12px;
+
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .wiki-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255, 122, 26, 0.4);
+        }
+
+        .wiki-card-icon {
+            display: block;
+            margin-bottom: 12px;
+            font-size: 22px;
+        }
+
+        .wiki-card strong {
+            display: block;
+            margin-bottom: 6px;
+
+            color: var(--wiki-text);
+            font-size: 13px;
+        }
+
+        .wiki-card p {
+            margin: 0;
+            color: var(--wiki-muted);
+            font-size: 11px;
+        }
+
+        .wiki-toc {
+            margin: 25px 0;
+            padding: 20px;
+
+            background: var(--wiki-panel);
+            border: 1px solid var(--wiki-border);
+            border-radius: 12px;
+        }
+
+        .wiki-toc strong {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--wiki-text);
+            font-size: 13px;
+        }
+
+        .wiki-toc ol {
+            margin: 0;
+        }
+
+        .wiki-toc a {
+            color: var(--wiki-muted);
+            transition: color 0.2s;
+        }
+
+        .wiki-toc a:hover {
+            color: var(--wiki-orange-light);
+        }
+
+        .wiki-table-wrap {
+            margin: 20px 0;
+            overflow-x: auto;
+            border: 1px solid var(--wiki-border);
+            border-radius: 10px;
+        }
+
+        .wiki-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        .wiki-table th,
+        .wiki-table td {
+            padding: 13px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--wiki-border);
+        }
+
+        .wiki-table th {
+            background: #21170f;
+            color: var(--wiki-orange-light);
+        }
+
+        .wiki-table td {
+            color: #c6b6a8;
+        }
+
+        .wiki-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .wiki-article-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+
+            margin-top: 55px;
+            padding-top: 22px;
+
+            border-top: 1px solid var(--wiki-border);
+
+            color: var(--wiki-muted);
+            font-size: 11px;
+        }
+
+        .wiki-article-footer a {
+            color: var(--wiki-orange-light);
+        }
+
+        .wiki-article-footer a:hover {
+            color: white;
+        }
+
+        .wiki-empty {
+            display: none;
+            padding: 15px 10px;
+            color: var(--wiki-muted);
+            font-size: 12px;
+        }
+
+        .wiki-mobile-toggle {
+            display: none;
+            padding: 8px 11px;
+
+            background: #21170f;
+            border: 1px solid var(--wiki-border);
+            border-radius: 8px;
+
+            color: var(--wiki-text);
+            cursor: pointer;
+        }
+
+        @media (max-width: 900px) {
+            .wiki-layout {
+                grid-template-columns: 220px minmax(0, 1fr);
+            }
+
+            .wiki-sidebar {
+                width: 220px;
+                padding: 24px 13px;
+            }
+
+            .wiki-main {
+                padding: 40px 5%;
+            }
+
+            .wiki-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .wiki-topbar {
+                height: 62px;
+                padding: 0 16px;
+            }
+
+            .wiki-brand-icon {
+                width: 34px;
+                height: 34px;
+            }
+
+            .wiki-brand-name {
+                font-size: 12px;
+            }
+
+            .wiki-brand-subtitle {
+                display: none;
+            }
+
+            .wiki-home-link {
+                display: none;
+            }
+
+            .wiki-discord {
+                padding: 8px 10px;
+                font-size: 10px;
+            }
+
+            .wiki-mobile-toggle {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .wiki-layout {
+                display: block;
+            }
+
+            .wiki-sidebar {
+                display: none;
+
+                position: fixed;
+                top: 62px;
+                bottom: 0;
+                left: 0;
+
+                width: min(300px, 85vw);
+                z-index: 90;
+
+                padding: 22px 17px;
+
+                box-shadow: 15px 0 40px rgba(0, 0, 0, 0.35);
+            }
+
+            .wiki-sidebar.open {
+                display: block;
+            }
+
+            .wiki-main {
+                padding: 32px 20px 50px;
+            }
+
+            .wiki-article h1 {
+                font-size: 35px;
+            }
+
+            .wiki-intro {
+                font-size: 13px;
+            }
+
+            .wiki-section h2 {
+                font-size: 21px;
+            }
+
+            .wiki-section p,
+            .wiki-section ul,
+            .wiki-section ol {
+                font-size: 12px;
+            }
+
+            .wiki-article-footer {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="wiki-topbar">
+
+        <button
+            class="wiki-mobile-toggle"
+            id="wiki-menu-toggle"
+            type="button"
+            aria-label="Ouvrir le menu"
+            aria-expanded="false"
+            aria-controls="wiki-sidebar"
+        >
+            ☰
+        </button>
+
+        <a href="index.html" class="wiki-brand">
+            <span class="wiki-brand-icon">A</span>
+
+            <span>
+                <span class="wiki-brand-name">
+                    ANNECY <span>RP</span>
+                </span>
+                <br>
+                <span class="wiki-brand-subtitle">
+                    Wiki & Documentation
+                </span>
+            </span>
+        </a>
+
+        <div class="wiki-top-actions">
+            <a href="index.html" class="wiki-home-link">
+                ← Retour au site
+            </a>
+
+            <a
+                href="https://discord.gg/cvPhsmeE4x"
+                class="wiki-discord"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Rejoindre Discord
+            </a>
+        </div>
+
+    </header>
+
+
+    <div class="wiki-layout">
+        <aside class="wiki-sidebar" id="wiki-sidebar">
+
+            <input
+                type="search"
+                class="wiki-search"
+                id="wiki-search"
+                placeholder="⌕  Rechercher une règle..."
+                aria-label="Rechercher dans le wiki"
+            >
+
+            <div class="wiki-nav-title">Commencer</div>
+
+            <nav class="wiki-nav" aria-label="Documentation">
+
+                <a href="#introduction" class="active">
+                    <span class="wiki-nav-icon">⌂</span>
+                    Introduction
+                </a>
+
+                <a href="#reglement">
+                    <span class="wiki-nav-icon">📕</span>
+                    Règlement général
+                </a>
+
+                <a href="#roleplay">
+                    <span class="wiki-nav-icon">🎭</span>
+                    Règles roleplay
+                </a>
+
+                <a href="#comportement">
+                    <span class="wiki-nav-icon">🤝</span>
+                    Comportement
+                </a>
+
+            </nav>
+
+
+            <div class="wiki-nav-title">Vie en jeu</div>
+
+            <nav class="wiki-nav" aria-label="Règles de jeu">
+
+                <a href="#metiers">
+                    <span class="wiki-nav-icon">💼</span>
+                    Métiers & activités
+                </a>
+
+                <a href="#securite">
+                    <span class="wiki-nav-icon">🚓</span>
+                    Forces de l'ordre
+                </a>
+
+                <a href="#sanctions">
+                    <span class="wiki-nav-icon">⚖️</span>
+                    Sanctions
+                </a>
+
+            </nav>
+
+
+            <div class="wiki-nav-title">Aide</div>
+
+            <nav class="wiki-nav" aria-label="Aide et assistance">
+
+                <a href="#support">
+                    <span class="wiki-nav-icon">💬</span>
+                    Support & assistance
+                </a>
+
+                <a href="#faq">
+                    <span class="wiki-nav-icon">❔</span>
+                    FAQ
+                </a>
+
+            </nav>
+
+
+            <div class="wiki-sidebar-footer">
+                <strong>Besoin d'aide ?</strong>
+                <p>
+                    Si tu as une question, rejoins notre Discord
+                    pour contacter la communauté ou le staff.
+                </p>
+            </div>
+
+            <div class="wiki-empty" id="wiki-empty">
+                Aucun résultat trouvé.
+            </div>
+
+        </aside>
+
+        <main class="wiki-main">
+
+            <article class="wiki-article">
+
+                <!-- INTRODUCTION -->
+                <section class="wiki-section" id="introduction">
+
+                    <div class="wiki-breadcrumb">
+                        <span>Wiki</span>
+                        <span>/</span>
+                        <span>Introduction</span>
+                    </div>
+
+                    <span class="wiki-label">
+                        Documentation officielle
+                    </span>
+
+                    <h1>
+                        Le Wiki <span>Annecy RP</span>
+                    </h1>
+
+                    <p class="wiki-intro">
+                        Bienvenue dans le centre de documentation
+                        d'Annecy RP. Tu retrouveras ici les règles,
+                        les informations utiles et les principes
+                        essentiels pour profiter pleinement de
+                        ton expérience roleplay.
+                    </p>
+
+                    <div class="wiki-meta">
+                        <span>📚 Guide du serveur</span>
+                        <span>🟠 Annecy RP</span>
+                        <span>📖 À lire avant de jouer</span>
+                    </div>
+
+                    <div class="wiki-callout">
+                        <span class="wiki-callout-icon">💡</span>
+                        <div>
+                            <strong>Avant de commencer votre roleplay</strong>
+                            <p>
+                                Avant de rejoindre le serveur, prends le temps de lire le règlement et les règles roleplay. Cela te permettra de mieux comprendre les attentes de la communauté et d'éviter les sanctions.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="wiki-cards">
+
+                        <a href="#reglement" class="wiki-card">
+                            <span class="wiki-card-icon">📕</span>
+                            <strong>Règlement général</strong>
+                            <p>
+                                Les principes fondamentaux
+                                à respecter sur le serveur.
+                            </p>
+                        </a>
+
+                        <a href="#roleplay" class="wiki-card">
+                            <span class="wiki-card-icon">🎭</span>
+                            <strong>Règles roleplay</strong>
+                            <p>
+                                Les bases pour jouer des scènes
+                                cohérentes et agréables.
+                            </p>
+                        </a>
+
+                        <a href="#sanctions" class="wiki-card">
+                            <span class="wiki-card-icon">⚖️</span>
+                            <strong>Sanctions</strong>
+                            <p>
+                                Le fonctionnement général
+                                de la modération.
+                            </p>
+                        </a>
+
+                        <a href="#support" class="wiki-card">
+                            <span class="wiki-card-icon">💬</span>
+                            <strong>Support</strong>
+                            <p>
+                                Où demander de l'aide
+                                en cas de problème.
+                            </p>
+                        </a>
+
+                    </div>
+
+                </section>
+
+                <section class="wiki-section" id="reglement">
+
+                    <h2>📕 1. Règlement général</h2>
+
+                    <p>
+                        Le règlement général définit les principes
+                        de vie sur Annecy RP. Chaque joueur doit
+                        en prendre connaissance et respecter les
+                        consignes communiquées par l'équipe.
+                    </p>
+
+                    <h3>1.1 Respect des joueurs</h3>
+
+                    <ul>
+                        <li>Respecte tous les membres de la communauté.</li>
+                        <li>Évite les insultes, le harcèlement et les provocations.</li>
+                        <li>Ne perturbe pas volontairement l'expérience des autres.</li>
+                        <li>Respecte les décisions de modération dans le cadre des règles.</li>
+                    </ul>
+
+                    <h3>1.2 Utilisation du serveur</h3>
+
+                    <ul>
+                        <li>Respecte les consignes et annonces officielles.</li>
+                        <li>N'exploite pas de bugs ou de failles pour obtenir un avantage injuste.</li>
+                        <li>N'utilise pas de triche ni d'outil interdit par le serveur ou Roblox.</li>
+                        <li>Signale les problèmes importants à l'équipe.</li>
+                    </ul>
+
+                </section>
+                <section class="wiki-section" id="roleplay">
+
+                    <h2>🎭 2. Règles roleplay</h2>
+
+                    <p>
+                        Le roleplay consiste à incarner un personnage
+                        dans un univers partagé. Les actions doivent
+                        rester cohérentes avec la situation et les
+                        possibilités du jeu.
+                    </p>
+
+                    <h3>2.1 Rester dans son personnage</h3>
+
+                    <ul>
+                        <li>Fais la différence entre les informations connues par toi et celles connues par ton personnage.</li>
+                        <li>Privilégie les échanges en jeu pour résoudre les situations roleplay.</li>
+                        <li>Évite les actions irréalistes qui empêchent les autres de participer à la scène.</li>
+                    </ul>
+
+                    <h3>2.2 Respect des scènes</h3>
+
+                    <ul>
+                        <li>Laisse les autres joueurs participer aux interactions.</li>
+                        <li>Évite de perturber volontairement une scène en cours.</li>
+                        <li>Accepte que les actions aient des conséquences dans les limites des règles du serveur.</li>
+                    </ul>
+
+                    <div class="wiki-callout">
+                        <span class="wiki-callout-icon">💡</span>
+                        <div>
+                            <strong>Conseil roleplay</strong>
+                            <p>
+                                Prends le temps de construire ton personnage.
+                                Une bonne scène repose sur les échanges,
+                                la cohérence et le plaisir de jouer ensemble.
+                            </p>
+                        </div>
+                    </div>
+
+                </section>
+                <section class="wiki-section" id="comportement">
+
+                    <h2>🤝 3. Comportement & communauté</h2>
+
+                    <p>
+                        Annecy RP est une communauté dans laquelle
+                        chacun doit pouvoir jouer dans une ambiance
+                        respectueuse.
+                    </p>
+
+                    <h3>3.1 Comportement attendu</h3>
+
+                    <ul>
+                        <li>Reste poli et respectueux, même en cas de désaccord.</li>
+                        <li>Évite les conflits personnels dans les espaces publics.</li>
+                        <li>Respecte la vie privée des autres membres.</li>
+                        <li>Utilise les canaux de communication prévus pour chaque sujet.</li>
+                    </ul>
+
+                    <h3>3.2 Communication</h3>
+
+                    <p>
+                        Les échanges doivent rester compréhensibles
+                        et adaptés au contexte. En cas de conflit,
+                        privilégie le dialogue ou contacte le support.
+                    </p>
+
+                </section>
+
+                <section class="wiki-section" id="metiers">
+
+                    <h2>💼 4. Métiers & activités</h2>
+
+                    <p>
+                        Les métiers et activités disponibles dépendent
+                        des fonctionnalités réellement proposées
+                        sur le serveur Roblox.
+                    </p>
+
+                    <h3>4.1 Jouer un métier</h3>
+
+                    <ul>
+                        <li>Respecte le rôle et les responsabilités de ton personnage.</li>
+                        <li>Évite les comportements destinés uniquement à gêner les autres joueurs.</li>
+                        <li>Respecte les éventuelles procédures spécifiques au métier.</li>
+                    </ul>
+
+                </section>
+
+                <section class="wiki-section" id="securite">
+
+                    <h2>🚓 5. Forces de l'ordre</h2>
+
+                    <p>
+                        Cette rubrique est destinée aux règles
+                        applicables aux forces de l'ordre si ces
+                        services sont présents sur le serveur.
+                    </p>
+
+                    <h3>5.1 Principes généraux</h3>
+
+                    <ul>
+                        <li>Agis conformément au rôle de ton personnage.</li>
+                        <li>Respecte les procédures définies par le serveur.</li>
+                        <li>Évite les décisions arbitraires qui nuisent au roleplay.</li>
+                    </ul>
+
+                    <p>
+                        Les procédures d'intervention, les poursuites,
+                        les arrestations et les sanctions en jeu doivent
+                        être documentées selon les règles officielles
+                        de ton serveur.
+                    </p>
+
+                </section>
+
+                <section class="wiki-section" id="sanctions">
+
+                    <h2>⚖️ 6. Sanctions & modération</h2>
+
+                    <p>
+                        L'équipe de modération veille au respect
+                        des règles et au bon déroulement des activités.
+                        Les mesures appliquées doivent suivre le
+                        règlement officiel du serveur.
+                    </p>
+
+                    <h3>6.1 Types de mesures possibles</h3>
+
+                    <div class="wiki-table-wrap">
+                        <table class="wiki-table">
+                            <thead>
+                                <tr>
+                                    <th>Mesure</th>
+                                    <th>Principe</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Avertissement</td>
+                                    <td>Rappel des règles applicables.</td>
+                                </tr>
+                                <tr>
+                                    <td>Exclusion temporaire</td>
+                                    <td>Suspension limitée dans le temps, si prévue.</td>
+                                </tr>
+                                <tr>
+                                    <td>Exclusion définitive</td>
+                                    <td>Mesure pouvant être appliquée dans les cas prévus par le règlement.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="wiki-callout">
+                        <span class="wiki-callout-icon">⚠️</span>
+                        <div>
+                            <strong>Barème non officiel</strong>
+                            <p>
+                                Ce tableau présente des exemples de mesures.
+                                Il ne constitue pas le barème réel d'Annecy RP.
+                                Ajoute les durées, motifs et modalités de recours
+                                uniquement après validation par le staff.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3>6.2 Contester une décision</h3>
+
+                    <p>
+                        Si tu souhaites demander une explication ou
+                        contester une décision, contacte l'équipe
+                        via les moyens de support officiels.
+                        Présente les faits calmement et fournis
+                        les informations utiles.
+                    </p>
+
+                </section>
+
+                <section class="wiki-section" id="support">
+
+                    <h2>💬 7. Support & assistance</h2>
+
+                    <p>
+                        Si tu rencontres un problème, si tu as une
+                        question ou si tu souhaites signaler un
+                        comportement, tu peux contacter la communauté
+                        via le Discord officiel.
+                    </p>
+
+                    <div class="wiki-callout">
+                        <span class="wiki-callout-icon">💬</span>
+                        <div>
+                            <strong>Besoin d'aide ?</strong>
+                            <p>
+                                Rejoins le Discord d'Annecy RP et utilise
+                                les salons de support disponibles.
+                            </p>
+                            <p>
+                                <a
+                                    href="https://discord.gg/cvPhsmeE4x"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    style="color:#ffad66;font-weight:bold"
+                                >
+                                    Accéder au Discord →
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3>7.1 Préparer une demande</h3>
+
+                    <ul>
+                        <li>Explique clairement la situation.</li>
+                        <li>Indique le contexte et les informations utiles.</li>
+                        <li>Fournis des captures ou des preuves pertinentes si nécessaire.</li>
+                        <li>Évite de publier des informations personnelles.</li>
+                    </ul>
+
+                </section>
+
+                <section class="wiki-section" id="faq">
+
+                    <h2>❔ 8. Questions fréquentes</h2>
+
+                    <h3>Où trouver les annonces du serveur ?</h3>
+                    <p>
+                        Consulte les salons d'annonces et les
+                        informations publiées par l'équipe
+                        sur le Discord officiel.
+                    </p>
+
+                    <h3>Que faire si je constate une infraction ?</h3>
+                    <p>
+                        Rassemble les informations utiles et
+                        transmets-les au staff via le support
+                        approprié, sans provoquer publiquement
+                        les personnes concernées.
+                    </p>
+
+                    <h3>Comment proposer une amélioration ?</h3>
+                    <p>
+                        Présente ton idée sur le canal prévu
+                        à cet effet, si le serveur en propose un.
+                    </p>
+
+                    <h3>Ce wiki est-il le règlement définitif ?</h3>
+                    <p>
+                        Non. Cette version constitue une base de
+                        documentation à adapter et à faire valider
+                        par l'équipe d'Annecy RP avant publication
+                        comme règlement officiel.
+                    </p>
+
+                </section>
+
+                <footer class="wiki-article-footer">
+
+                    <span>
+                        © 2026 Annecy RP — Wiki communautaire
+                    </span>
+
+                    <a href="#introduction">
+                        Retour en haut
+                    </a>
+
+                </footer>
+
+            </article>
+
+        </main>
+
+    </div>
+
+
+    <script>
+        const searchInput = document.getElementById("wiki-search");
+        const sidebar = document.getElementById("wiki-sidebar");
+        const menuToggle = document.getElementById("wiki-menu-toggle");
+        const emptyMessage = document.getElementById("wiki-empty");
+
+        const navigationLinks = [
+            ...sidebar.querySelectorAll(".wiki-nav a")
+        ];
+
+        const wikiSections = [
+            ...document.querySelectorAll(".wiki-section")
+        ];
+
+        searchInput.addEventListener("input", () => {
+            const query = searchInput.value
+                .trim()
+                .toLocaleLowerCase("fr");
+
+            let visibleCount = 0;
+
+            navigationLinks.forEach(link => {
+                const targetId = link.getAttribute("href").slice(1);
+                const section = document.getElementById(targetId);
+
+                if (!section) return;
+
+                const searchableText = (
+                    link.textContent + " " + section.textContent
+                ).toLocaleLowerCase("fr");
+
+                const matches = searchableText.includes(query);
+
+                link.hidden = !matches;
+
+                if (matches) visibleCount++;
+            });
+
+            wikiSections.forEach(section => {
+                const searchableText = section.textContent
+                    .toLocaleLowerCase("fr");
+
+                const matches = searchableText.includes(query);
+
+                section.hidden = query !== "" && !matches;
+            });
+
+            emptyMessage.style.display =
+                query !== "" && visibleCount === 0
+                    ? "block"
+                    : "none";
+        });
+
+        menuToggle.addEventListener("click", () => {
+            const isOpen = sidebar.classList.toggle("open");
+
+            menuToggle.setAttribute("aria-expanded", String(isOpen));
+            menuToggle.setAttribute(
+                "aria-label",
+                isOpen ? "Fermer le menu" : "Ouvrir le menu"
+            );
+
+            menuToggle.textContent = isOpen ? "✕" : "☰";
+        });
+
+        navigationLinks.forEach(link => {
+            link.addEventListener("click", () => {
+                navigationLinks.forEach(item => {
+                    item.classList.remove("active");
+                });
+
+                link.classList.add("active");
+
+                sidebar.classList.remove("open");
+                menuToggle.setAttribute("aria-expanded", "false");
+                menuToggle.setAttribute("aria-label", "Ouvrir le menu");
+                menuToggle.textContent = "☰";
+            });
+        });
+    </script>
+
+</body>
+</html>
